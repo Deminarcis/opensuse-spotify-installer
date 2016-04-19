@@ -199,6 +199,8 @@ install () {
             echo
             download_spotify_deb
             echo
+            maybe_install_update-desktop-files
+            echo
             build_rpm
             echo
             install_rpm
@@ -223,6 +225,13 @@ install_libmp3lame0 () {
     safe_run sudo zypper -n --gpg-auto-import-keys in -l libmp3lame0
     echo
     progress "Installed libmp3lame0."
+}
+
+install_update-desktop-files ()
+    echo
+    safe_run sudo zypper in update-desktop-files
+    echo
+    progress "Installed update-desktop-files."
 }
 
 install_rpm () {
@@ -265,6 +274,21 @@ Packman now?"
             y|yes|Y|YES)
                 echo
                 install_libmp3lame0
+                ;;
+        esac
+    fi
+}
+
+maybe_install_update-desktop-files () {
+    if ! rpm -q update-desktop-files >/dev/null; then
+        warn "\
+WARNING: You do not have update-desktop-files installed, without this the rpm will fail to build.  Would you like me to install this now?"
+        echo -n "Type y/n> "
+        read answer
+        case "$answer" in
+            y|yes|Y|YES)
+                echo
+                install_update-desktop-files
                 ;;
         esac
     fi

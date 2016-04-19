@@ -26,6 +26,7 @@ Source0: DEB_I386
 %endif
 NoSource:       0
 %if 0%{?suse_version}
+BuildRequires:  update-desktop-files
 Requires:       mozilla-nss
 Requires:       mozilla-nspr
 Requires:       libopenssl1_0_0
