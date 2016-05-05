@@ -17,7 +17,7 @@ RPM_SOURCE_DIR="$RPM_TOPDIR/SOURCES"
 RPM_SPEC_DIR="."
 RPM_NAME="spotify-client"
 
-ISSUE_TRACKER_URL="https://github.com/cornguo/opensuse-spotify-installer/issues"
+ISSUE_TRACKER_URL="https://github.com/Deminarcis/opensuse-spotify-installer/issues"
 
 # get system architecture
 ARCH=$(arch)
@@ -227,7 +227,7 @@ install_libmp3lame0 () {
     progress "Installed libmp3lame0."
 }
 
-install_update-desktop-files ()
+install_update_desktop_files (){
     echo
     safe_run sudo zypper in update-desktop-files
     echo
@@ -279,7 +279,7 @@ Packman now?"
     fi
 }
 
-maybe_install_update-desktop-files () {
+maybe_install_update_desktop_files () {
     if ! rpm -q update-desktop-files >/dev/null; then
         warn "\
 WARNING: You do not have update-desktop-files installed, without this the rpm will fail to build.  Would you like me to install this now?"
