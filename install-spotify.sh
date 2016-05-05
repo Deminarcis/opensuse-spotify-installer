@@ -199,11 +199,13 @@ install () {
             echo
             download_spotify_deb
             echo
-            maybe_install_update-desktop-files
+            maybe_install_update_desktop_files
             echo
             build_rpm
             echo
             install_rpm
+            echo
+            fix_icon
         fi
         echo
         maybe_install_libmp3lame0
@@ -211,6 +213,11 @@ install () {
         SPOTIFY_BIN=`which spotify`
         progress "Spotify can now be run via $SPOTIFY_BIN - happy listening!"
     fi
+}
+
+fix_icon () {
+  echo "fixing the icon for the desktop file"
+  sudo cp /usr/share/spotify/icons/spotify-linux-48.png /usr/share/icons/spotify-client.png
 }
 
 install_libmp3lame0 () {
@@ -288,7 +295,7 @@ WARNING: You do not have update-desktop-files installed, without this the rpm wi
         case "$answer" in
             y|yes|Y|YES)
                 echo
-                install_update-desktop-files
+                install_update_desktop_files
                 ;;
         esac
     fi
